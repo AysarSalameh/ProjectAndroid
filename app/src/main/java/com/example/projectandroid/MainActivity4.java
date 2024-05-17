@@ -13,7 +13,10 @@ private ListView lstl;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
-        lstl.findViewById(R.id.lst);
+        view();
 
+    }
+    public void view(){
+        lstl=findViewById(R.id.lst);
     }
 }
