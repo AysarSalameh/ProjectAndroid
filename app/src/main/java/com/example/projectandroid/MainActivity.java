@@ -22,13 +22,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button Login;
     private Button reg;
-private CheckBox chk;
+    private CheckBox chk;
     private EditText fname;
     private  EditText lname;
     private EditText email;
@@ -38,6 +38,7 @@ private CheckBox chk;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference colRef = db.collection("Users");
     private CollectionReference colRefsupplier = db.collection("Suppliers");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,6 @@ private CheckBox chk;
             }
         });
 
-
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,26 +69,47 @@ private CheckBox chk;
                     edit.putString("password", strpass);
                     edit.commit();
                     Users user = new Users(firstname, lastname, stremail, strpass);
-                    if (isInternetAvailable()) {
-                        colRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d("Error333", e.toString());
-                            }
-                        });
-                    } else {
-                        Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
+
+                    // Check if the email already exists
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Users")
+                            .whereEqualTo("email", stremail)
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                        // Email already exists,
+                                        Toast.makeText(MainActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Email doesn't exist
+                                        if (isInternetAvailable()) {
+                                            colRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d("Error333", e.toString());
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("Error333", e.toString());
+                                }
+                            });
+                } else {
                     boolean flag=true;
                     String firstname = fname.getText().toString();
                     String lastname = lname.getText().toString();
@@ -120,11 +141,9 @@ private CheckBox chk;
                         Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 }
-                }
-
+            }
         });
     }
-
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -146,7 +165,6 @@ private CheckBox chk;
         chk.setChecked(savedInstanceState.getBoolean("isChecked", false));
     }
 
-
     public void  view (){
         reg=findViewById(R.id.btnreg);
         Login = findViewById(R.id.btnlogin);
@@ -157,26 +175,26 @@ private CheckBox chk;
         chk=findViewById(R.id.chk);
     }
 
-
     private void setupSharedPrefs() {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         edit = preferences.edit();
     }
+
     private void checkPrefs() {
-        String firstname=preferences.getString("firstname", "");
-        String lastname=preferences.getString("lastname", "");
-        String password=preferences.getString("password", "");
-        String emaill=preferences.getString("email", "");
+        String firstname = preferences.getString("firstname", "");
+        String lastname = preferences.getString("lastname", "");
+        String password = preferences.getString("password", "");
+        String emaill = preferences.getString("email", "");
         fname.setText(firstname);
         lname.setText(lastname);
         email.setText(emaill);
         pass.setText(password);
     }
+
     public boolean isInternetAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-
     }
 }
