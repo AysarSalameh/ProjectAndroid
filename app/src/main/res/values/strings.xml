@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ProjectAndroid</string>
+    <string name="registration">Registration</string>
+    <string name="firt_name">Firt Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="rember_me">Rember me</string>
+    <string name="login">Login</string>
+</resources>
