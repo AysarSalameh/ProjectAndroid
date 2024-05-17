@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button reg;
     private CheckBox chk;
     private EditText fname;
-    private  EditText lname;
+    private EditText lname;
     private EditText email;
     private EditText pass;
     private SharedPreferences preferences;
@@ -58,20 +58,19 @@ public class MainActivity extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!chk.isChecked()) {
-                    String firstname = fname.getText().toString();
-                    String lastname = lname.getText().toString();
-                    String stremail = email.getText().toString();
-                    String strpass = pass.getText().toString();
-                    edit.putString("firstname", firstname);
-                    edit.putString("lastname", lastname);
-                    edit.putString("email", stremail);
-                    edit.putString("password", strpass);
-                    edit.commit();
-                    Users user = new Users(firstname, lastname, stremail, strpass);
+                String firstname = fname.getText().toString();
+                String lastname = lname.getText().toString();
+                String stremail = email.getText().toString();
+                String strpass = pass.getText().toString();
+                edit.putString("firstname", firstname);
+                edit.putString("lastname", lastname);
+                edit.putString("email", stremail);
+                edit.putString("password", strpass);
+                edit.commit();
+                Users user = new Users(firstname, lastname, stremail, strpass);
 
-                    // Check if the email already exists
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                if (!chk.isChecked()) {
+                    // Check if the email already exists for  users
                     db.collection("Users")
                             .whereEqualTo("email", stremail)
                             .get()
@@ -79,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                     if (!queryDocumentSnapshots.isEmpty()) {
-                                        // Email already exists,
+                                        // Email already exists for  user
                                         Toast.makeText(MainActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        // Email doesn't exist
+                                        // Email doesn't exist for  user
                                         if (isInternetAvailable()) {
                                             colRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
@@ -110,36 +109,44 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                 } else {
-                    boolean flag=true;
-                    String firstname = fname.getText().toString();
-                    String lastname = lname.getText().toString();
-                    String stremail = email.getText().toString();
-                    String strpass = pass.getText().toString();
-                    edit.putString("firstname", firstname);
-                    edit.putString("lastname", lastname);
-                    edit.putString("email", stremail);
-                    edit.putString("password", strpass);
-                    edit.commit();
-                    Users supplier = new Users(firstname, lastname, stremail, strpass);
-                    if (isInternetAvailable()) {
-                        colRefsupplier.add(supplier).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                                intent.putExtra("FLAG", flag);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d("Error333", e.toString());
-                            }
-                        });
-                    } else {
-                        Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
+                    // Check if the email already exists
+                    db.collection("Suppliers")
+                            .whereEqualTo("email", stremail)
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                        // Email already exists
+                                        Toast.makeText(MainActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Email doesn't exist
+                                        if (isInternetAvailable()) {
+                                            colRefsupplier.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d("Error333", e.toString());
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("Error333", e.toString());
+                                }
+                            });
                 }
             }
         });
@@ -165,14 +172,14 @@ public class MainActivity extends AppCompatActivity {
         chk.setChecked(savedInstanceState.getBoolean("isChecked", false));
     }
 
-    public void  view (){
-        reg=findViewById(R.id.btnreg);
+    public void view() {
+        reg = findViewById(R.id.btnreg);
         Login = findViewById(R.id.btnlogin);
-        fname=findViewById(R.id.fname);
-        lname=findViewById(R.id.lname);
-        email=findViewById(R.id.email);
-        pass=findViewById(R.id.pass);
-        chk=findViewById(R.id.chk);
+        fname = findViewById(R.id.fname);
+        lname = findViewById(R.id.lname);
+        email = findViewById(R.id.email);
+        pass = findViewById(R.id.pass);
+        chk = findViewById(R.id.chk);
     }
 
     private void setupSharedPrefs() {
