@@ -2,10 +2,14 @@ package com.example.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,28 +41,39 @@ data();
     }
 
 
-
-    private void data(){
+    private void data() {
         String url = "http://10.0.2.2:80/Android/getAllBarndsCars.php";
 
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-                null, new com.android.volley.Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                ArrayList<String> todos = new ArrayList<>();
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject obj = response.getJSONObject(i);
-                        todos.add(obj.getString("Brand"));
-                    } catch (JSONException exception) {
-                        Log.d("volley_error", exception.toString());
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new com.android.volley.Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        ArrayList<String> todos = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject obj = response.getJSONObject(i);
+                                todos.add(obj.getString("Brand"));
+                            } catch (JSONException exception) {
+                                Log.d("volley_error", exception.toString());
+                            }
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity4.this,
+                                android.R.layout.simple_list_item_1, todos);
+                        lstl.setAdapter(adapter);
+                        lstl.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String selectedItem = (String) parent.getItemAtPosition(position);
+                                String message = "" + selectedItem;
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(MainActivity4.this, MainActivity5.class);
+                                intent.putExtra("data", message);
+                                startActivity(intent);
+                            }
+                        });
                     }
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity4.this,
-                        android.R.layout.simple_list_item_1, todos);
-                lstl.setAdapter(adapter);
-            }
-        }, new com.android.volley.Response.ErrorListener() {
+                }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("volley_error", error.toString());
@@ -67,4 +82,5 @@ data();
 
         queue.add(request);
     }
+
 }
