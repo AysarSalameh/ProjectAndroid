@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class MainActivity5 extends AppCompatActivity {
+public class ChoosseCar extends AppCompatActivity {
 private TextView txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main5);
+        setContentView(R.layout.choossecar);
         Intent intent = getIntent();
         view();
         String brand = intent.getStringExtra("data");

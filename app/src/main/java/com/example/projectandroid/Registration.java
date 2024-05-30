@@ -24,7 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class MainActivity extends AppCompatActivity {
+public class Registration extends AppCompatActivity {
 
     private Button Login;
     private Button reg;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.registration);
         view();
         setupSharedPrefs();
         checkPrefs();
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent(Registration.this, com.example.projectandroid.Login.class);
                 startActivity(intent);
             }
         });
@@ -79,15 +79,15 @@ public class MainActivity extends AppCompatActivity {
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                     if (!queryDocumentSnapshots.isEmpty()) {
                                         // Email already exists for  user
-                                        Toast.makeText(MainActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Registration.this, "Email already exists", Toast.LENGTH_SHORT).show();
                                     } else {
                                         // Email doesn't exist for  user
                                         if (isInternetAvailable()) {
                                             colRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
                                                 public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                                                    Toast.makeText(Registration.this, "data added", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(Registration.this, com.example.projectandroid.Login.class);
                                                     startActivity(intent);
                                                     finish();
                                                 }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                                 }
                                             });
                                         } else {
-                                            Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Registration.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -118,15 +118,15 @@ public class MainActivity extends AppCompatActivity {
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                     if (!queryDocumentSnapshots.isEmpty()) {
                                         // Email already exists
-                                        Toast.makeText(MainActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Registration.this, "Email already exists", Toast.LENGTH_SHORT).show();
                                     } else {
                                         // Email doesn't exist
                                         if (isInternetAvailable()) {
                                             colRefsupplier.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
                                                 public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                                                    Toast.makeText(Registration.this, "data added", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(Registration.this, com.example.projectandroid.Login.class);
                                                     startActivity(intent);
                                                     finish();
                                                 }
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                                                 }
                                             });
                                         } else {
-                                            Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Registration.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/colorgradnint"
-    tools:context=".MainActivity4">
+    tools:context=".Brand">
 
     <TextView
         android:id="@+id/textView2"

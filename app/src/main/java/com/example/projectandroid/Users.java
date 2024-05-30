@@ -16,6 +16,12 @@ public class Users {
         this.password = password;
     }
 
+    public Users(String firtName, String lastName, String email) {
+        this.firtName = firtName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public String getFirtName() {
         return firtName;
     }

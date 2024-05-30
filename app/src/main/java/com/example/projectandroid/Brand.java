@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,22 +15,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.api.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity4 extends AppCompatActivity {
+public class Brand extends AppCompatActivity {
     private ListView lstl;
     private RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.brand);
         view();
 data();
     }
@@ -60,7 +57,7 @@ data();
                                 Log.d("volley_error", exception.toString());
                             }
                         }
-                        BrandsAdapter adapter = new BrandsAdapter(MainActivity4.this, cars);
+                        BrandsAdapter adapter = new BrandsAdapter(Brand.this, cars);
                         lstl.setAdapter(adapter);
                         lstl.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -69,7 +66,7 @@ data();
                                 String message = selectedItem.toString();
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(MainActivity4.this, MainActivity5.class);
+                                Intent intent = new Intent(Brand.this, ChoosseCar.class);
                                 intent.putExtra("data", message);
                                 startActivity(intent);
                             }
@@ -88,7 +85,7 @@ data();
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(MainActivity4.this, MainActivity3.class);
+        Intent intent = new Intent(Brand.this, Rental_or_stauts.class);
         startActivity(intent);
         finish();
     }

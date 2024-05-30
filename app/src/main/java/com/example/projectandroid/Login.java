@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,7 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class MainActivity2 extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor edit;
 
@@ -38,7 +37,7 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.login);
         boolean isChecked = getIntent().getBooleanExtra("FLAG", false);
         view();
         setupSharedPrefs();
@@ -47,7 +46,7 @@ public class MainActivity2 extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                Intent intent = new Intent(com.example.projectandroid.Login.this, Registration.class);
                 startActivity(intent);
             }
         });
@@ -79,14 +78,15 @@ public class MainActivity2 extends AppCompatActivity {
                                         String stordlname = document.getString("lastName");
 
                                         if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                            Toast.makeText(MainActivity2.this, "successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                                            Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
                                             intent.putExtra("stordfname", stordfname);
                                             intent.putExtra("stordlname", stordlname);
+                                            Users users=new Users(stordfname,stordlname,emailstord);
                                             startActivity(intent);
                                             finish();
                                         } else {
-                                            Toast.makeText(MainActivity2.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
 
@@ -104,18 +104,19 @@ public class MainActivity2 extends AppCompatActivity {
                                                             String stordlname = document.getString("lastName");
 
                                                             if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                                                Toast.makeText(MainActivity2.this, "successful", Toast.LENGTH_SHORT).show();
-                                                                Intent intent = new Intent(MainActivity2.this, Suppliers.class);
+                                                                Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
                                                                 intent.putExtra("stordfname", stordfname);
                                                                 intent.putExtra("stordlname", stordlname);
+                                                                Users users=new Users(stordfname,stordlname,emailstord);
                                                                 startActivity(intent);
                                                                 finish();
                                                             } else {
-                                                                Toast.makeText(MainActivity2.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                                             }
                                                         } else {
 
-                                                            Toast.makeText(MainActivity2.this, "User does not exist", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(com.example.projectandroid.Login.this, "User does not exist", Toast.LENGTH_SHORT).show();
 
                                                         }
                                                     }
@@ -151,14 +152,15 @@ public class MainActivity2 extends AppCompatActivity {
                                         String stordlname = document.getString("lastName");
 
                                         if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                            Toast.makeText(MainActivity2.this, "successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(MainActivity2.this, Suppliers.class);
+                                            Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
                                             intent.putExtra("stordfname", stordfname);
                                             intent.putExtra("stordlname", stordlname);
+                                            Users users=new Users(stordfname,stordlname,emailstord);
                                             startActivity(intent);
                                             finish();
                                         } else {
-                                            Toast.makeText(MainActivity2.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
 
@@ -176,14 +178,15 @@ public class MainActivity2 extends AppCompatActivity {
                                                             String stordlname = document.getString("lastName");
 
                                                             if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                                                Toast.makeText(MainActivity2.this, "successful", Toast.LENGTH_SHORT).show();
-                                                                Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                                                                Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
                                                                 intent.putExtra("stordfname", stordfname);
                                                                 intent.putExtra("stordlname", stordlname);
+                                                                Users users=new Users(stordfname,stordlname,emailstord);
                                                                 startActivity(intent);
                                                                 finish();
                                                             } else {
-                                                                Toast.makeText(MainActivity2.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                                             }
                                                         } else {
 
@@ -201,18 +204,19 @@ public class MainActivity2 extends AppCompatActivity {
                                                                                 String stordlname = document.getString("lastName");
 
                                                                                 if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                                                                    Toast.makeText(MainActivity2.this, "successful", Toast.LENGTH_SHORT).show();
-                                                                                    Intent intent = new Intent(MainActivity2.this, Suppliers.class);
+                                                                                    Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                                                                    Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
                                                                                     intent.putExtra("stordfname", stordfname);
                                                                                     intent.putExtra("stordlname", stordlname);
+                                                                                    Users users=new Users(stordfname,stordlname,emailstord);
                                                                                     startActivity(intent);
                                                                                     finish();
                                                                                 } else {
-                                                                                    Toast.makeText(MainActivity2.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
+                                                                                    Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                                                                 }
                                                                             } else {
 
-                                                                                Toast.makeText(MainActivity2.this, "User does not exist", Toast.LENGTH_SHORT).show();
+                                                                                Toast.makeText(com.example.projectandroid.Login.this, "User does not exist", Toast.LENGTH_SHORT).show();
 
                                                                             }
                                                                         }
