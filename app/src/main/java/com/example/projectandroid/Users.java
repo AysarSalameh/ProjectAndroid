@@ -1,6 +1,8 @@
 package com.example.projectandroid;
 
-public class Users {
+import java.io.Serializable;
+
+public class Users implements Serializable {
     private String firtName;
     private String lastName;
     private String email;

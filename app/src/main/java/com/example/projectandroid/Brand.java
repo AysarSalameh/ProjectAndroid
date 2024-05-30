@@ -25,12 +25,17 @@ import java.util.ArrayList;
 public class Brand extends AppCompatActivity {
     private ListView lstl;
     private RequestQueue queue;
+   public String firstname;
+    public  String lastname;
+    public String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.brand);
+        Intent intent = getIntent();
         view();
-data();
+        pass(intent);
+        data();
     }
     public void view(){
         lstl=findViewById(R.id.lst);
@@ -67,6 +72,9 @@ data();
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(Brand.this, ChoosseCar.class);
+                                intent.putExtra("stordfname", firstname);
+                                intent.putExtra("stordlname", lastname);
+                                intent.putExtra("email", email);
                                 intent.putExtra("data", message);
                                 startActivity(intent);
                             }
@@ -88,6 +96,17 @@ data();
         Intent intent = new Intent(Brand.this, Rental_or_stauts.class);
         startActivity(intent);
         finish();
+    }
+    public void pass( Intent intent){
+
+         firstname = intent.getStringExtra("stordfname");
+         lastname = intent.getStringExtra("stordlname");
+         email = intent.getStringExtra("email");
+        String message = "First Name: " + firstname + "\n" +
+                "Last Name: " + lastname + "\n" +
+                "Email: " + email;
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
     }
 
 }

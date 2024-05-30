@@ -20,11 +20,16 @@ public class Rental_or_stauts extends AppCompatActivity {
         view();
         String firstname = intent.getStringExtra("stordfname");
         String lastname = intent.getStringExtra("stordlname");
+        String email = intent.getStringExtra("email");
+
         txtShowName.setText("Welcome "+firstname+" "+lastname);
         car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Rental_or_stauts.this, Brand.class);
+                intent.putExtra("stordfname", firstname);
+                intent.putExtra("stordlname", lastname);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }

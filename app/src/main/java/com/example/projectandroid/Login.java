@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
                                             Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
                                             intent.putExtra("stordfname", stordfname);
                                             intent.putExtra("stordlname", stordlname);
-                                            Users users=new Users(stordfname,stordlname,emailstord);
+                                            intent.putExtra("email", emailstord);
                                             startActivity(intent);
                                             finish();
                                         } else {
@@ -108,7 +108,7 @@ public class Login extends AppCompatActivity {
                                                                 Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
                                                                 intent.putExtra("stordfname", stordfname);
                                                                 intent.putExtra("stordlname", stordlname);
-                                                                Users users=new Users(stordfname,stordlname,emailstord);
+                                                                intent.putExtra("email", emailstord);
                                                                 startActivity(intent);
                                                                 finish();
                                                             } else {
@@ -156,7 +156,8 @@ public class Login extends AppCompatActivity {
                                             Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
                                             intent.putExtra("stordfname", stordfname);
                                             intent.putExtra("stordlname", stordlname);
-                                            Users users=new Users(stordfname,stordlname,emailstord);
+                                            intent.putExtra("email", emailstord);
+
                                             startActivity(intent);
                                             finish();
                                         } else {
@@ -182,7 +183,8 @@ public class Login extends AppCompatActivity {
                                                                 Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
                                                                 intent.putExtra("stordfname", stordfname);
                                                                 intent.putExtra("stordlname", stordlname);
-                                                                Users users=new Users(stordfname,stordlname,emailstord);
+                                                                intent.putExtra("email", emailstord);
+
                                                                 startActivity(intent);
                                                                 finish();
                                                             } else {
@@ -208,7 +210,8 @@ public class Login extends AppCompatActivity {
                                                                                     Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
                                                                                     intent.putExtra("stordfname", stordfname);
                                                                                     intent.putExtra("stordlname", stordlname);
-                                                                                    Users users=new Users(stordfname,stordlname,emailstord);
+                                                                                    intent.putExtra("email", emailstord);
+
                                                                                     startActivity(intent);
                                                                                     finish();
                                                                                 } else {
