@@ -48,23 +48,25 @@ data();
                 new com.android.volley.Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        ArrayList<String> todos = new ArrayList<>();
+                        ArrayList<Brands> cars = new ArrayList<>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject obj = response.getJSONObject(i);
-                                todos.add(obj.getString("Brand"));
+                                String brand=obj.getString("Brand");
+                                String logo=obj.getString("logo");
+                                Brands brands=new Brands(brand,logo);
+                                cars.add(brands);
                             } catch (JSONException exception) {
                                 Log.d("volley_error", exception.toString());
                             }
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity4.this,
-                                android.R.layout.simple_list_item_1, todos);
+                        BrandsAdapter adapter = new BrandsAdapter(MainActivity4.this, cars);
                         lstl.setAdapter(adapter);
                         lstl.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String selectedItem = (String) parent.getItemAtPosition(position);
-                                String message = "" + selectedItem;
+                                Brands selectedItem = (Brands) parent.getItemAtPosition(position);
+                                String message = selectedItem.toString();
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(MainActivity4.this, MainActivity5.class);
@@ -81,6 +83,14 @@ data();
         });
 
         queue.add(request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(MainActivity4.this, MainActivity3.class);
+        startActivity(intent);
+        finish();
     }
 
 }
