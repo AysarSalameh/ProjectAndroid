@@ -17,6 +17,7 @@ public class Suppliers extends AppCompatActivity {
         view();
         String firstname = intent.getStringExtra("stordfname");
         String lastname = intent.getStringExtra("stordlname");
+        String email = intent.getStringExtra("email");
         txtShowName.setText("Welcome Suppliers "+firstname+" "+lastname);
 
     }
