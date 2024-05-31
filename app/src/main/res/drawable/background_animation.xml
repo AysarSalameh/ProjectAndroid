@@ -1,0 +1,21 @@
+
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/animated_background"
+    android:constantSize="true"
+    android:variablePadding="true">
+
+
+    <item android:id="@android:id/accessibilityActionContextClick">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF0000" />
+        </shape>
+    </item>
+
+
+    <transition
+        android:drawable="@drawable/logoo"
+    android:fromId="@android:id/empty"
+    android:toId="@android:id/accessibilityActionContextClick"
+    android:duration="1000" />
+
+</animated-selector>

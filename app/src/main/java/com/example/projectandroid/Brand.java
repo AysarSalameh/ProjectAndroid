@@ -34,8 +34,9 @@ public class Brand extends AppCompatActivity {
         setContentView(R.layout.brand);
         Intent intent = getIntent();
         view();
-        pass(intent);
         data();
+        pass(intent);
+
     }
     public void view(){
         lstl=findViewById(R.id.lst);

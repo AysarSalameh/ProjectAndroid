@@ -13,8 +13,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,9 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class Registration extends AppCompatActivity {
 
-    private Button Login;
+    private TextView Login;
     private Button reg;
-    private CheckBox chk;
     private EditText fname;
     private EditText lname;
     private EditText email;
@@ -37,7 +36,6 @@ public class Registration extends AppCompatActivity {
     private SharedPreferences.Editor edit;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference colRef = db.collection("Users");
-    private CollectionReference colRefsupplier = db.collection("Suppliers");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,85 +67,44 @@ public class Registration extends AppCompatActivity {
                 edit.commit();
                 Users user = new Users(firstname, lastname, stremail, strpass);
 
-                if (!chk.isChecked()) {
-                    // Check if the email already exists for  users
-                    db.collection("Users")
-                            .whereEqualTo("email", stremail)
-                            .get()
-                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        // Email already exists for  user
-                                        Toast.makeText(Registration.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                // Check if the email already exists for users
+                db.collection("Users")
+                        .whereEqualTo("email", stremail)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                    // Email already exists for user
+                                    Toast.makeText(Registration.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // Email doesn't exist for user
+                                    if (isInternetAvailable()) {
+                                        colRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Toast.makeText(Registration.this, "Data added", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(Registration.this, com.example.projectandroid.Login.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("Error333", e.toString());
+                                            }
+                                        });
                                     } else {
-                                        // Email doesn't exist for  user
-                                        if (isInternetAvailable()) {
-                                            colRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(Registration.this, "data added", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(Registration.this, com.example.projectandroid.Login.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.d("Error333", e.toString());
-                                                }
-                                            });
-                                        } else {
-                                            Toast.makeText(Registration.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                                        }
+                                        Toast.makeText(Registration.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("Error333", e.toString());
-                                }
-                            });
-                } else {
-                    // Check if the email already exists
-                    db.collection("Suppliers")
-                            .whereEqualTo("email", stremail)
-                            .get()
-                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        // Email already exists
-                                        Toast.makeText(Registration.this, "Email already exists", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        // Email doesn't exist
-                                        if (isInternetAvailable()) {
-                                            colRefsupplier.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(Registration.this, "data added", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(Registration.this, com.example.projectandroid.Login.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.d("Error333", e.toString());
-                                                }
-                                            });
-                                        } else {
-                                            Toast.makeText(Registration.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("Error333", e.toString());
-                                }
-                            });
-                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("Error333", e.toString());
+                            }
+                        });
             }
         });
     }
@@ -159,7 +116,6 @@ public class Registration extends AppCompatActivity {
         outState.putString("lastname", lname.getText().toString());
         outState.putString("email", email.getText().toString());
         outState.putString("password", pass.getText().toString());
-        outState.putBoolean("isChecked", chk.isChecked());
     }
 
     @Override
@@ -169,17 +125,15 @@ public class Registration extends AppCompatActivity {
         lname.setText(savedInstanceState.getString("lastname", ""));
         email.setText(savedInstanceState.getString("email", ""));
         pass.setText(savedInstanceState.getString("password", ""));
-        chk.setChecked(savedInstanceState.getBoolean("isChecked", false));
     }
 
     public void view() {
         reg = findViewById(R.id.btnreg);
-        Login = findViewById(R.id.btnlogin);
+        Login = findViewById(R.id.textView6);
         fname = findViewById(R.id.fname);
         lname = findViewById(R.id.lname);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
-        chk = findViewById(R.id.chk);
     }
 
     private void setupSharedPrefs() {
@@ -199,8 +153,7 @@ public class Registration extends AppCompatActivity {
     }
 
     public boolean isInternetAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }

@@ -22,7 +22,7 @@ public class Rental_or_stauts extends AppCompatActivity {
         String lastname = intent.getStringExtra("stordlname");
         String email = intent.getStringExtra("email");
 
-        txtShowName.setText("Welcome "+firstname+" "+lastname);
+        txtShowName.setText("Welcome,"+firstname);
         car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

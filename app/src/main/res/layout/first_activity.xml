@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallperr"
+    android:background="@color/white"
     tools:context=".FirstActivity">
 
     <Button
@@ -12,12 +12,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="78dp"
-        android:text="Go >>"
-        android:textStyle="italic"
-        android:textSize="20dp"
-        android:textColor="@color/black"
         android:backgroundTint="#FEFE01"
+        android:text="Go >>"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="169dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="199dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

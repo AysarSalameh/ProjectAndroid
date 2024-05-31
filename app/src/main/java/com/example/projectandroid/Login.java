@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,17 +33,16 @@ public class Login extends AppCompatActivity {
     private EditText email;
     private EditText pass;
     private boolean flaag = false;
-    private Button reg;
+    private TextView reg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        boolean isChecked = getIntent().getBooleanExtra("FLAG", false);
         view();
         setupSharedPrefs();
         checkPrefs();
-        reg = findViewById(R.id.btnreg);
+        reg = findViewById(R.id.textView4);
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,8 +53,15 @@ public class Login extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailstr = email.getText().toString();
-                String passsrt = pass.getText().toString();
+                String emailstr = email.getText().toString().trim();
+                String passsrt = pass.getText().toString().trim();
+
+                // Check if email and password are empty
+                if (emailstr.isEmpty() || passsrt.isEmpty()) {
+                    Toast.makeText(Login.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+                    return; // Exit the method without attempting login
+                }
+
                 if (checkBox.isChecked()) {
                     if (!flaag) {
                         edit.putString(EMAIL, emailstr);
@@ -63,194 +70,80 @@ public class Login extends AppCompatActivity {
                         edit.commit();
                     }
                 }
-                if (!isChecked) {
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("Users")
-                            .whereEqualTo("email", emailstr)
-                            .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                                        String emailstord = document.getString("email");
-                                        String passstord = document.getString("password");
-                                        String stordfname = document.getString("firtName");
-                                        String stordlname = document.getString("lastName");
 
-                                        if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                            Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
-                                            intent.putExtra("stordfname", stordfname);
-                                            intent.putExtra("stordlname", stordlname);
-                                            intent.putExtra("email", emailstord);
-                                            startActivity(intent);
-                                            finish();
-                                        } else {
-                                            Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
-                                        }
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                        .whereEqualTo("email", emailstr)
+                        .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                    DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                                    String emailstord = document.getString("email");
+                                    String passstord = document.getString("password");
+                                    String stordfname = document.getString("firtName");
+                                    String stordlname = document.getString("lastName");
+
+                                    if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
+                                        Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
+                                        intent.putExtra("stordfname", stordfname);
+                                        intent.putExtra("stordlname", stordlname);
+                                        intent.putExtra("email", emailstord);
+                                        startActivity(intent);
+                                        finish();
                                     } else {
-
-                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                        db.collection("Suppliers")
-                                                .whereEqualTo("email", emailstr)
-                                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                        if (!queryDocumentSnapshots.isEmpty()) {
-                                                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                                                            String emailstord = document.getString("email");
-                                                            String passstord = document.getString("password");
-                                                            String stordfname = document.getString("firtName");
-                                                            String stordlname = document.getString("lastName");
-
-                                                            if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                                                Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
-                                                                Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
-                                                                intent.putExtra("stordfname", stordfname);
-                                                                intent.putExtra("stordlname", stordlname);
-                                                                intent.putExtra("email", emailstord);
-                                                                startActivity(intent);
-                                                                finish();
-                                                            } else {
-                                                                Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        } else {
-
-                                                            Toast.makeText(com.example.projectandroid.Login.this, "User does not exist", Toast.LENGTH_SHORT).show();
-
-                                                        }
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-
-                                                    }
-                                                });
-
+                                        Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                     }
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
+                                } else {
 
-                                }
-                            });
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    db.collection("Suppliers")
+                                            .whereEqualTo("email", emailstr)
+                                            .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                                                        String emailstord = document.getString("email");
+                                                        String passstord = document.getString("password");
+                                                        String stordfname = document.getString("firtName");
+                                                        String stordlname = document.getString("lastName");
 
-                }
-                else{
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("Suppliers")
-                            .whereEqualTo("email", emailstr)
-                            .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                                        String emailstord = document.getString("email");
-                                        String passstord = document.getString("password");
-                                        String stordfname = document.getString("firtName");
-                                        String stordlname = document.getString("lastName");
-
-                                        if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                            Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
-                                            intent.putExtra("stordfname", stordfname);
-                                            intent.putExtra("stordlname", stordlname);
-                                            intent.putExtra("email", emailstord);
-
-                                            startActivity(intent);
-                                            finish();
-                                        } else {
-                                            Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
-                                        }
-                                    } else {
-
-                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                        db.collection("Users")
-                                                .whereEqualTo("email", emailstr)
-                                                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                        if (!queryDocumentSnapshots.isEmpty()) {
-                                                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                                                            String emailstord = document.getString("email");
-                                                            String passstord = document.getString("password");
-                                                            String stordfname = document.getString("firtName");
-                                                            String stordlname = document.getString("lastName");
-
-                                                            if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                                                Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
-                                                                Intent intent = new Intent(com.example.projectandroid.Login.this, Rental_or_stauts.class);
-                                                                intent.putExtra("stordfname", stordfname);
-                                                                intent.putExtra("stordlname", stordlname);
-                                                                intent.putExtra("email", emailstord);
-
-                                                                startActivity(intent);
-                                                                finish();
-                                                            } else {
-                                                                Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
-                                                            }
+                                                        if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
+                                                            Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
+                                                            intent.putExtra("stordfname", stordfname);
+                                                            intent.putExtra("stordlname", stordlname);
+                                                            intent.putExtra("email", emailstord);
+                                                            startActivity(intent);
+                                                            finish();
                                                         } else {
-
-                                                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                                            db.collection("Suppliers")
-                                                                    .whereEqualTo("email", emailstr)
-                                                                    .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                                        @Override
-                                                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                                            if (!queryDocumentSnapshots.isEmpty()) {
-                                                                                DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                                                                                String emailstord = document.getString("email");
-                                                                                String passstord = document.getString("password");
-                                                                                String stordfname = document.getString("firtName");
-                                                                                String stordlname = document.getString("lastName");
-
-                                                                                if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
-                                                                                    Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
-                                                                                    Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
-                                                                                    intent.putExtra("stordfname", stordfname);
-                                                                                    intent.putExtra("stordlname", stordlname);
-                                                                                    intent.putExtra("email", emailstord);
-
-                                                                                    startActivity(intent);
-                                                                                    finish();
-                                                                                } else {
-                                                                                    Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
-                                                                                }
-                                                                            } else {
-
-                                                                                Toast.makeText(com.example.projectandroid.Login.this, "User does not exist", Toast.LENGTH_SHORT).show();
-
-                                                                            }
-                                                                        }
-                                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                                        @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-
-                                                                        }
-                                                                    });
-
+                                                            Toast.makeText(com.example.projectandroid.Login.this, "Email or Password is wrong", Toast.LENGTH_SHORT).show();
                                                         }
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
+                                                    } else {
+
+                                                        Toast.makeText(com.example.projectandroid.Login.this, "User does not exist", Toast.LENGTH_SHORT).show();
 
                                                     }
-                                                });
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
 
+                                                }
+                                            });
 
-                                    }
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
-                                }
-                            });
+                            }
+                        });
 
 
-                }
             }
         });
     }

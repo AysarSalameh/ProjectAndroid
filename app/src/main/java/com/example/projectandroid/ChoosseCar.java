@@ -31,5 +31,10 @@ private TextView txt;
          firstname = intent.getStringExtra("stordfname");
          lastname = intent.getStringExtra("stordlname");
          email = intent.getStringExtra("email");
+        String message = "First Name: " + firstname + "\n" +
+                "Last Name: " + lastname + "\n" +
+                "Email: " + email;
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
     }
 }

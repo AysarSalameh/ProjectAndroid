@@ -2,26 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/colorgradnint"
+    android:background="@drawable/image"
+    android:backgroundTintMode="src_atop"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/username"
+        android:layout_marginTop="30dp"
+       android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:textSize="34sp"
-        android:textStyle="italic" />
+        android:textColor="@color/black"
+        android:textSize="34sp" />
 
     <Button
         android:id="@+id/car"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:backgroundTint="#CDC63B"
+        android:layout_marginTop="350dp"
         android:text="Car Rental"
+        android:background="#07D4FD"
         android:textColor="@color/black"
         android:textSize="24sp" />
 
@@ -29,8 +30,8 @@
         android:id="@+id/status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#CDC63B"
+        android:layout_marginTop="100dp"
+        android:background="#FA6805"
         android:text="Status"
         android:textColor="@color/black"
         android:textSize="24sp" />
