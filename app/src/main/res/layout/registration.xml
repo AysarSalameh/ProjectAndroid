@@ -32,7 +32,6 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="24dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/lname"
         app:layout_constraintStart_toStartOf="@+id/lname"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +50,6 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="24dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fname" />
@@ -68,7 +66,6 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="24dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/pass"
         app:layout_constraintStart_toStartOf="@+id/pass"
         app:layout_constraintTop_toBottomOf="@+id/lname" />
@@ -87,7 +84,6 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="24dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
@@ -114,10 +110,9 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="23dp"
         android:clickable="true"
-        android:text="Sin UP"
+        android:text="Sin in"
         android:textColor="#000000"
         android:textSize="22dp"
-        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/btnreg" />
 
