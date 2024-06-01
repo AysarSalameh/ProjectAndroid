@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#07D4FD"
+    android:background="#BFEEF8"
     tools:context=".Brand">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#FA6805"
+        android:textColor="#E60000"
         android:layout_marginTop="65dp"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
