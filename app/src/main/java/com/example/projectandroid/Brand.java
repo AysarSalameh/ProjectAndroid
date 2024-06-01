@@ -72,13 +72,15 @@ public class Brand extends AppCompatActivity {
                                 String message = selectedItem.toString();
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(Brand.this, ChoosseCar.class);
+                                Intent intent = new Intent(Brand.this, CarListActivity.class);
+                                intent.putExtra("brandID", String.valueOf(position + 1));
+                                intent.putExtra("brandName", selectedItem.getName_brand());
                                 intent.putExtra("stordfname", firstname);
                                 intent.putExtra("stordlname", lastname);
                                 intent.putExtra("email", email);
-                                intent.putExtra("data", message);
                                 startActivity(intent);
                             }
+
                         });
                     }
                 }, new com.android.volley.Response.ErrorListener() {
