@@ -18,222 +18,221 @@
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="588dp"
         android:layout_below="@id/car_image"
+        android:layout_marginTop="-43dp"
         android:background="@drawable/rounded_scrollview_background"
-
-        android:layout_marginTop="-16dp"
         android:clipToPadding="false"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="26dp"
-            android:layout_margin="7dp"
+            android:layout_margin="5dp"
             android:background="@drawable/rounded_linear_layout_background"
-        android:elevation="4dp"
-        android:layout_marginBottom="16dp">
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="19dp">
 
-        <!-- Car Name and Year -->
-        <TextView
-            android:id="@+id/car_name_year"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:text="BMW M4 competition (2020)"
-            android:textColor="#333333"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
-
-        <!-- Car Class -->
-        <TextView
-            android:id="@+id/car_class"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:text="Sport"
-            android:textColor="#666666"
-            android:textSize="18sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
-
-        <!-- Cost Per Day -->
-        <TextView
-            android:id="@+id/car_price_per_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:text="$300.0 per day"
-            android:textColor="#FF5722"
-            android:textSize="18sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
-
-        <!-- Description -->
-        <TextView
-            android:id="@+id/car_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:text="Testing"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
-
-        <!-- Fuel, Seats, and Doors Info -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="16dp"
-            android:weightSum="3"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <!-- Fuel Info -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_background_1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/fuel_icon" />
-
-                <TextView
-                    android:id="@+id/car_fuel_consumption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Bad"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Number of Seats -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_background_1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/seat_icon" />
-
-                <TextView
-                    android:id="@+id/car_seats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="4"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Number of Doors -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_background_1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/gate_icon" />
-
-                <TextView
-                    android:id="@+id/car_doors"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="2"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Number of Rental Days -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="16dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
+            <!-- Car Name and Year -->
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+                android:id="@+id/car_name_year"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:text="Days of rent"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:text="BMW M4 competition (2020)"
+                android:textColor="#333333"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Car Class -->
+            <TextView
+                android:id="@+id/car_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:text="Sport"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <!-- Cost Per Day -->
+            <TextView
+                android:id="@+id/car_price_per_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="$300.0 per day"
+                android:textColor="#FF5722"
+                android:textSize="18sp" />
+
+            <!-- Description -->
+            <TextView
+                android:id="@+id/car_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="Testing"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/btn_decrease_days"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/decrease_button"
-                android:text="-"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+            <!-- Fuel, Seats, and Doors Info -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:weightSum="3">
 
-            <TextView
-                android:id="@+id/tv_rental_days"
-                android:layout_width="wrap_content"
+                <!-- Fuel Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/fuel_icon" />
+
+                    <TextView
+                        android:id="@+id/car_fuel_consumption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Bad"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Number of Seats -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/seat_icon" />
+
+                    <TextView
+                        android:id="@+id/car_seats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Number of Doors -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/gate_icon" />
+
+                    <TextView
+                        android:id="@+id/car_doors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Number of Rental Days -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="16dp"
-                android:text="1"
-                android:textColor="#333333"
-                android:textSize="24sp" />
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
 
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:text="Days of rent"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_decrease_days"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/decrease_button"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_rental_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="1"
+                    android:textColor="#333333"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btn_increase_days"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/increase_button"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <!-- Book Now Button -->
             <Button
-                android:id="@+id/btn_increase_days"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/increase_button"
-                android:text="+"
+                android:id="@+id/btn_book_now"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/blue_rounded_shape"
+                android:text="Book Now"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
-        <!-- Book Now Button -->
-        <Button
-            android:id="@+id/btn_book_now"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@drawable/blue_rounded_shape"
-            android:text="Book Now"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-    </LinearLayout>
-</ScrollView>
-    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
