@@ -10,9 +10,10 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class FirstActivity extends AppCompatActivity {
-private Button btn;
+private TextView btn;
     private Animation bottom;
     private ImageView img;
 
