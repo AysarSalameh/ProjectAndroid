@@ -16,7 +16,7 @@ public class Car implements Serializable {
     private String description;
     private String fuelConsumption;
 
-    public Car(int carID, int brandID, String model, int year, String carClass, int seats, int doors, String image, double pricePerDay, double rating, String description, String fuelConsumption) {
+    public Car(int carID, int brandID, String model, int year, String carClass, int seats, int doors, String image, double pricePerDay, double rating, String description, String fuelConsumption) {//for all data of the calr information view
         this.carID = carID;
         this.brandID = brandID;
         this.model = model;
@@ -30,7 +30,7 @@ public class Car implements Serializable {
         this.description = description;
         this.fuelConsumption = fuelConsumption;
     }
-    public Car(int carID, int brandID, String model, int year, String carClass, int seats, int doors, String image, double pricePerDay, double rating) {
+    public Car(int carID, int brandID, String model, int year, String carClass, int seats, int doors, String image, double pricePerDay, double rating) {//for the car card data
         this.carID = carID;
         this.brandID = brandID;
         this.model = model;

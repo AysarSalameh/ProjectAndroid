@@ -43,14 +43,12 @@ public class CarListActivity extends AppCompatActivity {
         carAdapter = new CarAdapter(this, carList);
         recyclerView.setAdapter(carAdapter);
 
-        TextView welcomeMessage = findViewById(R.id.welcomeMessage);
 
         queue = Volley.newRequestQueue(this);
 
         brandID = getIntent().getStringExtra("brandID");
         brandName = getIntent().getStringExtra("brandName");
 
-        welcomeMessage.setText("Welcome, " + brandName);
 
         fetchCars();
     }

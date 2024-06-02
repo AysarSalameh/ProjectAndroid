@@ -1,3 +1,4 @@
+// CarAdapter.java
 package com.example.projectandroid;
 
 import android.content.Context;
@@ -5,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.BreakIterator;
 import java.util.List;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
@@ -39,13 +40,20 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         holder.year.setText(car.getYear() + " • " + car.getCarClass());
         holder.seats.setText(String.valueOf(car.getSeats()));
         holder.doors.setText(String.valueOf(car.getDoors()));
-        holder.price.setText("$" + car.getPricePerDay());
+        holder.price.setText("$" + car.getPricePerDay() + " per day");
         holder.rating.setText(String.valueOf(car.getRating()));
         Glide.with(context).load(car.getImage()).into(holder.image);
+
+        // Handle the Book Now button click
+        holder.bookNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CarInformationView.class);
+                intent.putExtra("car_id", car.getCarID());
+                context.startActivity(intent);
+            }
+        });
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -53,10 +61,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     }
 
     public class CarViewHolder extends RecyclerView.ViewHolder {
-        public View carInformation;
-        public BreakIterator carModel;
         TextView model, year, seats, doors, price, rating;
         ImageView image;
+        Button bookNowButton;
 
         public CarViewHolder(View itemView) {
             super(itemView);
@@ -67,6 +74,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             price = itemView.findViewById(R.id.car_price);
             rating = itemView.findViewById(R.id.car_rating);
             image = itemView.findViewById(R.id.car_image);
+            bookNowButton = itemView.findViewById(R.id.carInformation);
         }
     }
 }
