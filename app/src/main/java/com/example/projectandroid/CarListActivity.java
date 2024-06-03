@@ -1,7 +1,6 @@
 package com.example.projectandroid;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
