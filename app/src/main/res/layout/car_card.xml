@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/blue_rounded_shape"
+                android:background="@drawable/orang_rounded_shape"
                 android:fontFamily="@font/calibri"
                 android:padding="8dp"
                 android:text="Book Now"

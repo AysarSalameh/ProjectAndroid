@@ -1,7 +1,10 @@
+// CarListActivity.java
 package com.example.projectandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,25 +32,32 @@ public class CarListActivity extends AppCompatActivity {
     private RequestQueue queue;
     private String brandID;
     private String brandName;
+    private String firstname;
+    private String lastname;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_list);
 
+        // Get the intent data
+        Intent intent = getIntent();
+        firstname = intent.getStringExtra("stordfname");
+        lastname = intent.getStringExtra("stordlname");
+        email = intent.getStringExtra("email");
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         carList = new ArrayList<>();
-        carAdapter = new CarAdapter(this, carList);
+        carAdapter = new CarAdapter(this, carList, firstname, lastname, email);
         recyclerView.setAdapter(carAdapter);
-
 
         queue = Volley.newRequestQueue(this);
 
         brandID = getIntent().getStringExtra("brandID");
         brandName = getIntent().getStringExtra("brandName");
-
 
         fetchCars();
     }

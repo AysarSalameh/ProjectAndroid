@@ -1,10 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!-- res/layout/activity_rental_summary.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#373A40"
     tools:context=".RentalSummaryActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Container for all content with rounded corners and shadow -->
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@drawable/rounded_background"
+        android:elevation="8dp"
+        android:layout_centerInParent="true">
+
+        <!-- Car Image -->
+        <ImageView
+            android:id="@+id/car_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Car Name and Year -->
+        <TextView
+            android:id="@+id/tv_car_name_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Name (Year)"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Car Class -->
+        <TextView
+            android:id="@+id/tv_car_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Class"
+            android:textSize="18sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Total Cost -->
+        <TextView
+            android:id="@+id/tv_total_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Cost"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FF5722"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Full Name -->
+        <TextView
+            android:id="@+id/tv_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Confirm Button -->
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm Booking"
+            android:background="@drawable/orang_rounded_shape"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="12dp"/>
+    </LinearLayout>
+</RelativeLayout>

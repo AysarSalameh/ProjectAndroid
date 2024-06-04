@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="#373A40"
     tools:context=".CarInformationView">
 
     <!-- Car Image -->
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/car_image"
-        android:background="@drawable/rounded_scrollview_background"
+        android:background="@drawable/rounded_scrollview"
 
         android:layout_marginTop="-16dp"
         android:clipToPadding="false"
@@ -230,7 +230,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/blue_rounded_shape"
+            android:background="@drawable/orang_rounded_shape"
             android:text="Book Now"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
