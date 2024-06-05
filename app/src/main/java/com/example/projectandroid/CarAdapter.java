@@ -21,26 +21,25 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
     private Context context;
     private List<Car> carList;
-    private String firstname;
-    private String lastname;
-    private String email;
+    private String firstName, lastName, email;
 
-    public CarAdapter(Context context, List<Car> carList, String firstname, String lastname, String email) {
+    public CarAdapter(Context context, List<Car> carList, String firstName, String lastName, String email) {
         this.context = context;
         this.carList = carList;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
     }
 
+    @NonNull
     @Override
-    public CarViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.car_card, parent, false);
         return new CarViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(CarViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CarViewHolder holder, int position) {
         Car car = carList.get(position);
         holder.model.setText(car.getModel());
         holder.year.setText(car.getYear() + " • " + car.getCarClass());
@@ -56,16 +55,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, CarInformationView.class);
                 intent.putExtra("car_id", car.getCarID());
-                intent.putExtra("car_image_url", car.getImage()); // Pass the image URL
-                intent.putExtra("car_name_year", car.getModel() + " (" + car.getYear() + ")");
-                intent.putExtra("car_class", car.getCarClass());
-                intent.putExtra("price_per_day", car.getPricePerDay());
-
-                // Pass user information
-                intent.putExtra("stordfname", firstname);
-                intent.putExtra("stordlname", lastname);
+                intent.putExtra("stordfname", firstName);
+                intent.putExtra("stordlname", lastName);
                 intent.putExtra("email", email);
-
                 context.startActivity(intent);
             }
         });
@@ -81,7 +73,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         ImageView image;
         Button bookNowButton;
 
-        public CarViewHolder(View itemView) {
+        public CarViewHolder(@NonNull View itemView) {
             super(itemView);
             model = itemView.findViewById(R.id.car_model);
             year = itemView.findViewById(R.id.car_year);

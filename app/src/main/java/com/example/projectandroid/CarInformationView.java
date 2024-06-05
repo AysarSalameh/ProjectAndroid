@@ -31,8 +31,8 @@ public class CarInformationView extends AppCompatActivity {
     private int rentalDays = 1; // Default rental days
     private double pricePerDay = 0.0; // Initialize price per day
     private RequestQueue queue;
-    private String carImageUrl, carNameYearStr, carClassStr;
-    private String firstname, lastname, email;
+    private int carId;
+    private String carImageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,25 +57,13 @@ public class CarInformationView extends AppCompatActivity {
 
         // Get the intent and the Car ID
         Intent intent = getIntent();
-        int carId = intent.getIntExtra("car_id", -1);
-        carImageUrl = intent.getStringExtra("car_image_url");
-        carNameYearStr = intent.getStringExtra("car_name_year");
-        carClassStr = intent.getStringExtra("car_class");
-        pricePerDay = intent.getDoubleExtra("price_per_day", 0.0);
-
-        // Get user information from intent
-        firstname = intent.getStringExtra("stordfname");
-        lastname = intent.getStringExtra("stordlname");
-        email = intent.getStringExtra("email");
+        carId = intent.getIntExtra("car_id", -1);
+        String firstName = intent.getStringExtra("stordfname");
+        String lastName = intent.getStringExtra("stordlname");
+        String email = intent.getStringExtra("email");
 
         // Fetch car details from the database
         fetchCarDetails(carId);
-
-        // Display the image, name and year, class, and price per day directly from the intent
-        Glide.with(this).load(carImageUrl).into(carImage);
-        carNameYear.setText(carNameYearStr);
-        carClass.setText(carClassStr);
-        carPricePerDay.setText("$" + pricePerDay + " per day");
 
         // Set up button click listeners for increasing and decreasing rental days
         btnDecreaseDays.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +89,14 @@ public class CarInformationView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent rentalSummaryIntent = new Intent(CarInformationView.this, RentalSummaryActivity.class);
-                rentalSummaryIntent.putExtra("total_cost", pricePerDay * rentalDays);
-                rentalSummaryIntent.putExtra("stordfname", firstname);
-                rentalSummaryIntent.putExtra("stordlname", lastname);
+                rentalSummaryIntent.putExtra("car_id", carId);
+                rentalSummaryIntent.putExtra("stordfname", firstName);
+                rentalSummaryIntent.putExtra("stordlname", lastName);
                 rentalSummaryIntent.putExtra("email", email);
-                rentalSummaryIntent.putExtra("car_name_year", carNameYearStr);
-                rentalSummaryIntent.putExtra("car_class", carClassStr);
-                rentalSummaryIntent.putExtra("car_image_url", carImageUrl);
+                rentalSummaryIntent.putExtra("total_cost", pricePerDay * rentalDays);
+                rentalSummaryIntent.putExtra("car_name_year", carNameYear.getText().toString());
+                rentalSummaryIntent.putExtra("car_class", carClass.getText().toString());
+                rentalSummaryIntent.putExtra("car_image_url", carImageUrl); // pass the URL
                 startActivity(rentalSummaryIntent);
             }
         });
@@ -129,7 +118,7 @@ public class CarInformationView extends AppCompatActivity {
                             String fuelConsumption = response.getString("fuelConsumption");
                             int seats = response.getInt("seats");
                             int doors = response.getInt("doors");
-                            String imageUrl = response.getString("image");
+                            carImageUrl = response.getString("image");
 
                             carNameYear.setText(model + " (" + year + ")");
                             carClass.setText(carClassText);
@@ -139,7 +128,7 @@ public class CarInformationView extends AppCompatActivity {
                             carSeats.setText(String.valueOf(seats));
                             carDoors.setText(String.valueOf(doors));
 
-                            Glide.with(CarInformationView.this).load(imageUrl).into(carImage);
+                            Glide.with(CarInformationView.this).load(carImageUrl).into(carImage);
                         } catch (JSONException e) {
                             Log.e("CarInformationView", "JSON parsing error", e);
                         }
