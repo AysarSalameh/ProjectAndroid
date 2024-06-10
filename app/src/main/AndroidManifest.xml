@@ -14,6 +14,9 @@
         android:theme="@style/Theme.ProjectAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".deleteCars"
+            android:exported="false" />
+        <activity
             android:name=".suppliermin"
             android:exported="false" />
         <activity
@@ -28,7 +31,6 @@
         <activity
             android:name=".Status"
             android:exported="false" />
-
         <activity
             android:name=".CarListActivity"
             android:exported="false" />
