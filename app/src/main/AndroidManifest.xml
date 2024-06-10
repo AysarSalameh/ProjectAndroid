@@ -28,9 +28,7 @@
         <activity
             android:name=".Status"
             android:exported="false" />
-        <activity
-            android:name=".CarInformationActivity"
-            android:exported="false" />
+
         <activity
             android:name=".CarListActivity"
             android:exported="false" />
