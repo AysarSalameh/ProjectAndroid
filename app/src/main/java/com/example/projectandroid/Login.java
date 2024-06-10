@@ -112,7 +112,7 @@ public class Login extends AppCompatActivity {
 
                                                         if (emailstr.equals(emailstord) && passsrt.equals(passstord)) {
                                                             Toast.makeText(com.example.projectandroid.Login.this, "successful", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(com.example.projectandroid.Login.this, Suppliers.class);
+                                                            Intent intent = new Intent(com.example.projectandroid.Login.this, suppliermin.class);
                                                             intent.putExtra("stordfname", stordfname);
                                                             intent.putExtra("stordlname", stordlname);
                                                             intent.putExtra("email", emailstord);
