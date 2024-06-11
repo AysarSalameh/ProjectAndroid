@@ -2,7 +2,9 @@ package com.example.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,26 +17,30 @@ public class Rental_or_stauts extends AppCompatActivity {
     private String firstname;
     private String lastname;
     private String email;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rental_or_stauts);
-
+        Intent intent = getIntent();
         view();
+        firstname=intent.getStringExtra("stordfname");
+        txtShowName.setText("Welcome, " + firstname);
+        sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        firstname = sharedPreferences.getString("firstname", "");
+        txtShowName.setText("Welcome, " + firstname);
 
         if (savedInstanceState == null) {
-            Intent intent = getIntent();
-            firstname = intent.getStringExtra("stordfname");
+            firstname=intent.getStringExtra("stordfname");
             lastname = intent.getStringExtra("stordlname");
             email = intent.getStringExtra("email");
         } else {
-            firstname = savedInstanceState.getString("stordfname");
+            firstname=intent.getStringExtra("stordfname");
             lastname = savedInstanceState.getString("stordlname");
             email = savedInstanceState.getString("email");
-        }
 
-        txtShowName.setText("Welcome," + firstname);
+        }
 
         car.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +82,18 @@ public class Rental_or_stauts extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        Intent intent = getIntent();
-        firstname = intent.getStringExtra("stordfname");
-        lastname = intent.getStringExtra("stordlname");
-        email = intent.getStringExtra("email");
-        txtShowName.setText("Welcome," + firstname);
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        firstname = savedInstanceState.getString("stordfname");
+        lastname = savedInstanceState.getString("stordlname");
+        email = savedInstanceState.getString("email");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("firstname", firstname);
+       editor.apply();
     }
 }
