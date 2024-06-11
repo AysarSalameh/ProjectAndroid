@@ -248,22 +248,15 @@
 
         </LinearLayout>
 
-
-        <Button
-            android:id="@+id/btnAddImage"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editAddImage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Image Of Car"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:hint="Enter the url of Image"
+            android:layout_marginStart="10dp"/>
 
-        <ImageView
-            android:id="@+id/imgCar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@id/btnAddImage" />
 
 
     </LinearLayout>
