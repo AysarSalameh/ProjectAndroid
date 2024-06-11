@@ -118,11 +118,11 @@ public class supplieradd extends AppCompatActivity {
             postDataParams.put("carClass", spinnerClass.getSelectedItem().toString());
             postDataParams.put("seats", spinnerSeats.getSelectedItem().toString());
             postDataParams.put("doors", spinnerDoors.getSelectedItem().toString());
-            postDataParams.put("image", editAddImage.getText().toString());
             postDataParams.put("pricePerDay", editPricePerDay.getText().toString());
             postDataParams.put("rating", spinnerRating.getSelectedItem().toString());
             postDataParams.put("description", editDescription.getText().toString());
             postDataParams.put("fuelConsumption", editFuelConsumption.getText().toString());
+            postDataParams.put("image", editAddImage.getText().toString());  // Make sure this is the correct EditText for the image URL
 
             String response = performPostCall(urlString, postDataParams);
             runOnUiThread(() -> {
