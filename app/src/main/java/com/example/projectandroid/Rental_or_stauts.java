@@ -17,7 +17,6 @@ public class Rental_or_stauts extends AppCompatActivity {
     private String firstname;
     private String lastname;
     private String email;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +24,6 @@ public class Rental_or_stauts extends AppCompatActivity {
         setContentView(R.layout.rental_or_stauts);
         Intent intent = getIntent();
         view();
-        firstname=intent.getStringExtra("stordfname");
-        txtShowName.setText("Welcome, " + firstname);
-        sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-        firstname = sharedPreferences.getString("firstname", "");
-        txtShowName.setText("Welcome, " + firstname);
-
 
         if (savedInstanceState == null) {
             firstname=intent.getStringExtra("stordfname");
@@ -90,11 +83,4 @@ public class Rental_or_stauts extends AppCompatActivity {
         email = savedInstanceState.getString("email");
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("firstname", firstname);
-       editor.apply();
-    }
 }
