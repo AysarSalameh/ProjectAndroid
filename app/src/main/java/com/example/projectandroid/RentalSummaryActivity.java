@@ -85,6 +85,7 @@ public class RentalSummaryActivity extends AppCompatActivity {
                             Toast.makeText(RentalSummaryActivity.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
                             // Navigate to Status Activity
                             Intent intent = new Intent(RentalSummaryActivity.this, Rental_or_stauts.class);
+                            intent.putExtra("email", email); // email is retrieved from the intent extras or elsewhere in your activity
                             startActivity(intent);
                         } else {
                             Toast.makeText(RentalSummaryActivity.this, "Failed to place order", Toast.LENGTH_SHORT).show();

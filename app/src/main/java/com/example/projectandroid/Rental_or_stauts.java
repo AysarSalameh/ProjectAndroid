@@ -31,6 +31,7 @@ public class Rental_or_stauts extends AppCompatActivity {
         firstname = sharedPreferences.getString("firstname", "");
         txtShowName.setText("Welcome, " + firstname);
 
+
         if (savedInstanceState == null) {
             firstname=intent.getStringExtra("stordfname");
             lastname = intent.getStringExtra("stordlname");

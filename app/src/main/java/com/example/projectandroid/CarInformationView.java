@@ -122,7 +122,7 @@ public class CarInformationView extends AppCompatActivity {
 
                             carNameYear.setText(model + " (" + year + ")");
                             carClass.setText(carClassText);
-                            carPricePerDay.setText("$" + pricePerDay + " per day");
+                            carPricePerDay.setText("$" + pricePerDay);
                             carDescription.setText(description);
                             carFuelConsumption.setText(fuelConsumption);
                             carSeats.setText(String.valueOf(seats));

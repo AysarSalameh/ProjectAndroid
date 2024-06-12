@@ -39,16 +39,24 @@ public class Status extends AppCompatActivity {
         orderListView.setAdapter(orderAdapter);
 
         queue = Volley.newRequestQueue(this);
-        fetchOrders();
+
+        // Retrieve email from intent
+        String email = getIntent().getStringExtra("email");
+        if (email != null) {
+            fetchOrders(email);
+        } else {
+            Toast.makeText(this, "No email provided", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void fetchOrders() {
-        String url = "http://10.0.2.2:80/Android/getOrders.php";
+    private void fetchOrders(String email) {
+        String url = "http://10.0.2.2:80/Android/getOrderByEmail.php?email=" + email;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        orderList.clear();
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject obj = response.getJSONObject(i);

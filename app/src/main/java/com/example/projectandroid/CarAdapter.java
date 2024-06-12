@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
+public class  CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
     private Context context;
     private List<Car> carList;
