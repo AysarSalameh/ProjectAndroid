@@ -35,5 +35,14 @@
         android:background="@drawable/rectangular_button"
         android:text="Delete"
         android:textColor="@color/black"/>
+    <Button
+        android:id="@+id/button_order"
+        android:layout_width="231dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rectangular_button"
+        android:text="Order"
+        android:textColor="@color/black"/>
+
 
 </LinearLayout>
